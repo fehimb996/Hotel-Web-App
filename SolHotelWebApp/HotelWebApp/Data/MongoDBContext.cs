@@ -6,22 +6,14 @@ namespace HotelWebApp.Data
 {
     public class MongoDBContext
     {
-        private readonly IMongoDatabase _database = null;
-
-        public MongoDBContext(IOptions<Settings> settings)
+        public readonly IMongoDatabase _db;
+        public MongoDBContext(IOptions<Settings> options)
         {
-            var client = new MongoClient(settings.Value.ConnectionString);
-            if (client != null)
-                _database = client.GetDatabase(settings.Value.DatabaseName);
+            var client = new MongoClient(options.Value.ConnectionString);
+            _db = client.GetDatabase(options.Value.DatabaseName);
         }
 
-        public IMongoCollection<Room> Rooms
-        {
-            get
-            {
-                return _database.GetCollection<Room>("HotelAppCollection");
-            }
-        }
+        public IMongoCollection<Room> apartmentsCollection => _db.GetCollection<Room>("Rooms");
 
         public class Settings
         {

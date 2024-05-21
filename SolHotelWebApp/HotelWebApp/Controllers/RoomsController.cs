@@ -15,10 +15,10 @@ namespace HotelWebApp.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var rooms = await _context.Rooms.Find(_ => true).ToListAsync();
-            return View(rooms);
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    var rooms = await _context.Rooms.Find(_ => true).ToListAsync();
+        //    return View(rooms);
+        //}
     }
 }

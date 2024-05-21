@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@* @model IEnumerable<HotelWebApp.Models.Room>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Rooms</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Address</th>
+            <th>Beds</th>
+            <th>City</th>
+            <th>Description</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.Naziv</td>
+                <td>@room.Cena</td>
+                <td>@room.Adresa</td>
+                <td>@room.BrojKreveta</td>
+                <td>@room.Grad</td>
+                <td>@room.Opis</td>
+                <td>@room.Zemlja</td>
+            </tr>
+        }
+    </tbody>
+</table>
+ *@
