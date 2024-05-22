@@ -2,14 +2,20 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using HotelWebApp.Data;
 using HotelWebApp.Models;
+using HotelWebApp.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.Configure<MongoDBContext.Settings>(
-    builder.Configuration.GetSection("ConnectionStrings"));
+// MongoDB
+builder.Services.Configure<DBSettings>(
+    options =>
+    {
+        options.ConnectionString = builder.Configuration.GetSection("MongoDB:ConnectionString").Value;
+        options.DatabaseName = builder.Configuration.GetSection("MongoDB:DatabaseName").Value;
+    });
 
-builder.Services.AddSingleton<MongoDBContext>();
+// Add services to the container.
+//builder.Services.AddScoped<IRoom, MongoDBContext>();
 
 builder.Services.AddControllersWithViews();
 
