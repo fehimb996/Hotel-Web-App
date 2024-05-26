@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using HotelWebApp.Data;
+using HotelWebApp.Interfaces;
 using HotelWebApp.Models;
 using MongoDB.Driver;
 
@@ -8,17 +9,15 @@ namespace HotelWebApp.Controllers
 {
     public class RoomsController : Controller
     {
-        private readonly MongoDBContext _context;
+        private readonly IRoom _room;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public RoomsController(MongoDBContext context)
+        public RoomsController(IRoom room, IWebHostEnvironment hostingEnvironment)
         {
-            _context = context;
+            _room = room;
+            _hostingEnvironment = hostingEnvironment;
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    var rooms = await _context.Rooms.Find(_ => true).ToListAsync();
-        //    return View(rooms);
-        //}
+
     }
 }
