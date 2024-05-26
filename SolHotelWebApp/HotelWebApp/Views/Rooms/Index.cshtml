@@ -1,31 +1,52 @@
-﻿@* @model IEnumerable<HotelWebApp.Models.Room>
+﻿@model List<HotelWebApp.Models.Room>
 
-<h1>Rooms</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Address</th>
-            <th>Beds</th>
-            <th>City</th>
-            <th>Description</th>
-            <th>Country</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var room in Model)
-        {
-            <tr>
-                <td>@room.Naziv</td>
-                <td>@room.Cena</td>
-                <td>@room.Adresa</td>
-                <td>@room.BrojKreveta</td>
-                <td>@room.Grad</td>
-                <td>@room.Opis</td>
-                <td>@room.Zemlja</td>
-            </tr>
-        }
-    </tbody>
-</table>
- *@
+@{
+    ViewData["Title"] = "Rooms";
+}
+
+<h2 class="text-center p-2">Naše ponude</h2>
+
+<div class="container">
+    @foreach (var room in Model)
+    {
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title text-info">@room.Naziv</h5>
+                                <p class="card-text">@room.Opis</p>
+                                <ul class="list-unstyled">
+                                    <li><strong>Adresa:</strong> @room.Adresa</li>
+                                    <li><strong>Grad:</strong> @room.Grad</li>
+                                    <li><strong>Zemlja:</strong> @room.Zemlja</li>
+                                    <li><strong>Broj kreveta:</strong> @room.BrojKreveta</li>
+                                    <li><strong>Cena:</strong> <span>@room.Cena</span> RSD</li>
+                                </ul>
+                                <div class="mt-auto">
+                                    <a href="@Url.Action("OneRoom", "Rooms", new { id = room.Id })" class="btn btn-primary me-2">View</a>
+                                    <a href="@Url.Action("ChangeRoomInfo", "Rooms", new { id = room.Id })" class="btn btn-secondary me-2">Edit</a>
+                                    <a href="@Url.Action("DeleteRoom", "Rooms", new { id = room.Id })" class="btn btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @if (room.Slike != null && room.Slike.Count > 0)
+                            {
+                                <img src="@room.Slike[0]" alt="Room Image" class="img-fluid h-100 w-100 card-img" style="object-fit: cover;">
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="container-flex" id="APIHotels">
+        <h1 class="text-center pt-2 pb-2" id="APIHotelsNaslov">Ponude iz drugih sajtova</h1>
+        <div class="row">
+
+        </div>
+    </div>
+</div>
