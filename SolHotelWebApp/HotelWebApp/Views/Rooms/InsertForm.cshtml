@@ -1,5 +1,48 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Room>
+
 @{
+    ViewData["Title"] = "Insert New Room";
 }
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2>Nova soba</h2>
+            <form method="post" enctype="multipart/form-data" action="@Url.Action("InsertNewRoom", "Rooms")">
+                <div class="form-group">
+                    <label for="Naziv">Naziv:</label>
+                    <input type="text" id="Naziv" name="Naziv" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="Adresa">Adresa:</label>
+                    <input type="text" id="Adresa" name="Adresa" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="Opis">Opis:</label>
+                    <textarea id="Opis" name="Opis" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="Grad">Grad:</label>
+                    <input type="text" id="Grad" name="Grad" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Zemlja">Zemlja:</label>
+                    <input type="text" id="Zemlja" name="Zemlja" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Cena">Cena:</label>
+                    <input type="number" id="Cena" name="Cena" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="BrojKreveta">Broj kreveta:</label>
+                    <input type="number" id="BrojKreveta" name="BrojKreveta" class="form-control">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="ImagePaths" class="form-label">Dodajte fotografije</label>
+                    <input type="file" class="form-control" id="ImagePaths" name="ImagePaths" accept="image/png, image/jpeg, image/jpg" multiple>
+                </div>
+                <button type="submit" class="btn btn-primary">Dodaj sobu</button>
+            </form>
+        </div>
+    </div>
+</div>
