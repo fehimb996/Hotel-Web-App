@@ -1,5 +1,65 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model HotelWebApp.Models.Room
+
 @{
+    ViewData["Title"] = "Izmeni informacije o sobi";
 }
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="mb-4 text-center">Izmeni podatke o sobi</h1>
+            <form method="post" asp-action="UpdateRoomInfo" asp-route-id="@Model.Id" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="Naziv" class="form-label">Naziv</label>
+                    <input type="text" class="form-control" id="Naziv" name="Naziv" value="@Model.Naziv" />
+                </div>
+                <div class="mb-3">
+                    <label for="Adresa" class="form-label">Adresa</label>
+                    <input type="text" class="form-control" id="Adresa" name="Adresa" value="@Model.Adresa" />
+                </div>
+                <div class="mb-3">
+                    <label for="Opis" class="form-label">Opis</label>
+                    <textarea class="form-control" id="Opis" rows="4" name="Opis">@Model.Opis</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="Grad" class="form-label">Grad</label>
+                    <input type="text" class="form-control" id="Grad" name="Grad" value="@Model.Grad" />
+                </div>
+                <div class="mb-3">
+                    <label for="Zemlja" class="form-label">Zemlja</label>
+                    <input type="text" class="form-control" id="Zemlja" name="Zemlja" value="@Model.Zemlja" />
+                </div>
+                <div class="mb-3">
+                    <label for="BrojKreveta" class="form-label">Broj kreveta</label>
+                    <input type="number" class="form-control" id="BrojKreveta" name="BrojKreveta" value="@Model.BrojKreveta" />
+                </div>
+                <div class="mb-3">
+                    <label for="Cena" class="form-label">Cena</label>
+                    <input type="text" class="form-control" id="Cena" name="Cena" value="@Model.Cena" />
+                </div>
+                @if (Model.Slike != null)
+                {
+
+                    <div class="mb-3">
+                        <label for="ExistingImages" class="form-label">Fotografije</label>
+                        @foreach (var images in Model.Slike)
+                        {
+                            <div class="image-container" data-image-path="@images">
+                                <img src="@images" alt="@images" width="100%" height="100%" />
+                                <button type="button" class="btn btn-danger" onclick="deleteImage('@Model.Id','@images')">Obriši</button>
+                            </div>
+                            <br />
+                        }
+                    </div>
+                }
+                <div class="mb-3">
+                    <label for="ImagePaths" class="form-label">Dodajte fotografije</label>
+                    <input type="file" class="form-control" id="ImagePaths" name="ImagePaths" accept="image/png, image/jpeg" multiple />
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Sačuvaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
