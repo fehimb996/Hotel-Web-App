@@ -140,4 +140,3 @@ function deleteImage(Id, imagePath) {
 //}
 
 //document.addEventListener('DOMContentLoaded', fetchHotels);
-
