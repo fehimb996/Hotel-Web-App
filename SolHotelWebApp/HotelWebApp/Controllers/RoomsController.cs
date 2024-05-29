@@ -39,6 +39,7 @@ namespace HotelWebApp.Controllers
             return View("ChangeRoomInfo", oneRoom);
         }
 
+        
         [HttpPost]
         public async Task<IActionResult> UpdateRoomInfo(string id, List<IFormFile> ImagePaths)
         {
@@ -77,12 +78,19 @@ namespace HotelWebApp.Controllers
 
             return RedirectToRoute("roomInfo", new { id = id });
         }
+        
         [HttpGet]
         public async Task<IActionResult> DeleteRoom(string id)
         {
             _room.DeleteRoom(id);
 
             return RedirectToRoute("allRooms");
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> InsertFormPage()
+        {
+            return View("InsertForm");
         }
     }
 }
