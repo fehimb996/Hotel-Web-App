@@ -38,5 +38,44 @@ namespace HotelWebApp.Controllers
             var oneRoom = _room.GetRoom(id);
             return View("ChangeRoomInfo", oneRoom);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateRoomInfo(string id, List<IFormFile> ImagePaths)
+        {
+            Room r = _room.GetRoom(id);
+
+            r.Naziv = Request.Form["Naziv"];
+            r.Adresa = Request.Form["Adresa"];
+            r.Opis = Request.Form["Opis"];
+            r.Grad = Request.Form["Grad"];
+
+            if (r.Slike == null)
+            {
+                r.Slike = new List<string>();
+            }
+
+            foreach (IFormFile file in ImagePaths)
+            {
+                if (file.Length > 0)
+                {
+                    var imagesFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+                    var uniqueFileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
+                    var filePath = Path.Combine(imagesFolder, uniqueFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    r.Slike.Add($"/images/{uniqueFileName}");
+                }
+            }
+            r.Zemlja = Request.Form["Zemlja"];
+            r.Cena = Convert.ToDecimal(Request.Form["Cena"]);
+            r.BrojKreveta = Int32.Parse(Request.Form["BrojKreveta"]);
+            _room.UpdateRoom(id, r);
+
+            return RedirectToRoute("roomInfo", new { id = id });
+        }
     }
 }
