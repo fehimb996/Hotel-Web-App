@@ -77,5 +77,12 @@ namespace HotelWebApp.Controllers
 
             return RedirectToRoute("roomInfo", new { id = id });
         }
+        [HttpGet]
+        public async Task<IActionResult> DeleteRoom(string id)
+        {
+            _room.DeleteRoom(id);
+
+            return RedirectToRoute("allRooms");
+        }
     }
 }
