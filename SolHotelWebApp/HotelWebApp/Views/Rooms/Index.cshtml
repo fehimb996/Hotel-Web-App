@@ -1,7 +1,7 @@
 ﻿@model List<HotelWebApp.Models.Room>
 
 @{
-    ViewData["Title"] = "Rooms";
+    ViewData["Title"] = "Sobe";
 }
 
 <h2 class="text-center p-2">Naše ponude</h2>
@@ -25,9 +25,9 @@
                                     <li><strong>Cena:</strong> <span>@room.Cena</span> RSD</li>
                                 </ul>
                                 <div class="mt-auto">
-                                    <a href="@Url.Action("OneRoom", "Rooms", new { id = room.Id })" class="btn btn-primary me-2">View</a>
-                                    <a href="@Url.Action("ChangeRoomInfo", "Rooms", new { id = room.Id })" class="btn btn-secondary me-2">Edit</a>
-                                    <a href="@Url.Action("DeleteRoom", "Rooms", new { id = room.Id })" class="btn btn-danger">Delete</a>
+                                    <a href="@Url.Action("OneRoom", "Rooms", new { id = room.Id })" class="btn btn-primary me-2">Pogledaj</a>
+                                    <a href="@Url.Action("ChangeRoomInfo", "Rooms", new { id = room.Id })" class="btn btn-secondary me-2">Izmeni</a>
+                                    <a href="@Url.Action("DeleteRoom", "Rooms", new { id = room.Id })" class="btn btn-danger">Obrisi</a>
                                 </div>
                             </div>
                         </div>
