@@ -31,5 +31,12 @@ namespace HotelWebApp.Controllers
             var oneRoom = _room.GetRoom(id);
             return View("RoomInfo", oneRoom);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ChangeRoomInfo(string id)
+        {
+            var oneRoom = _room.GetRoom(id);
+            return View("ChangeRoomInfo", oneRoom);
+        }
     }
 }
