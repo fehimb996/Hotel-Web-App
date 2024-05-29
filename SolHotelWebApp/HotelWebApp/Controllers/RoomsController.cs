@@ -92,5 +92,40 @@ namespace HotelWebApp.Controllers
         {
             return View("InsertForm");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> InsertNewRoom(List<IFormFile> ImagePaths)
+        {
+            Room r = new Room();
+            r.Naziv = Request.Form["Naziv"];
+            r.Adresa = Request.Form["Adresa"];
+            r.Opis = Request.Form["Opis"];
+            r.Grad = Request.Form["Grad"];
+
+            r.Slike = new List<string>();
+            foreach (IFormFile file in ImagePaths)
+            {
+                if (file.Length > 0)
+                {
+                    var imagesFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+                    var uniqueFileName = $"{Guid.NewGuid().ToString()}_{file.FileName}";
+                    var filePath = Path.Combine(imagesFolder, uniqueFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    r.Slike.Add($"/images/{uniqueFileName}");
+                }
+            }
+
+            r.Zemlja = Request.Form["Zemlja"];
+            r.Cena = Convert.ToDecimal(Request.Form["Cena"]);
+            r.BrojKreveta = Int32.Parse(Request.Form["BrojKreveta"]);
+            _room.CreateRoom(r);
+
+            return RedirectToRoute("allRooms");
+        }
     }
 }
