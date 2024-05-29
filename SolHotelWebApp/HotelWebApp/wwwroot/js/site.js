@@ -3,28 +3,6 @@
 
 // Write your JavaScript code.
 
-// JavaScript kod za brisanje slike
-//function deleteImage(Id, imagePath) {
-//    if (confirm('Are you sure you want to remove this image?')) {
-//        $.ajax({
-//            url: '/Rooms/DeletePhoto',
-//            type: 'POST',
-//            data: {
-//                id: Id,
-//                imagePath: imagePath
-//            },
-//            success: function (result) {
-//                if (result.success) {
-//                    $('.image-container[data-image-path="' + imagePath + '"]').remove();
-//                } else {
-//                    alert('Failed to remove image.');
-//                }
-//            }
-//        });
-//    }
-//}
-
-
 //const url = (() => {
 //    const baseUrl = 'https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchHotelsByLocation';
 //    const latitude = 40.730610;
