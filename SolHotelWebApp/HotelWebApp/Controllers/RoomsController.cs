@@ -17,7 +17,13 @@ namespace HotelWebApp.Controllers
             _room = room;
             _hostingEnvironment = hostingEnvironment;
         }
-
+        
+        [HttpGet]
+        public async Task<IActionResult> AllRooms()
+        {
+            var rooms = _room.GetAllRooms();
+            return View("Index", rooms);
+        }
 
     }
 }
